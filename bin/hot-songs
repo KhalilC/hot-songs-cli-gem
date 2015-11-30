@@ -1,0 +1,4 @@
+
+require_relative '../lib/hot_songs'
+
+HotSongs::CLI.new.index
