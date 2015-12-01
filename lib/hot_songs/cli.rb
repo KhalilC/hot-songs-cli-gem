@@ -1,3 +1,4 @@
+
 class HotSongs::CLI
   def about
     system 'clear'
@@ -7,7 +8,7 @@ class HotSongs::CLI
           as compiled by Nielsen Music and streaming activity data from online music sources tracked by Nielsen Music. 
           Songs are defined as current if they are newly-released titles, or songs receiving widespread airplay and/or 
           sales activity for the first time.".center(421)
-    menu
+    display_menu
   end
 
   def display_menu
@@ -15,9 +16,21 @@ class HotSongs::CLI
     genres = %w{ Pop Country Rock R&B/Rap Dance/Electronic Latin Christian/Gospel }
     genres.each.with_index(1) { |genre, index| puts "#{index}. #{genre}".center(125)}
     2.times {puts}
-    puts "Please pick a genre to see the week's hottest songs(1-7)".center(125)
-    choice = gets.chomp
+    user_input
   end
-  
+
+  def user_input
+    begin
+    puts "Please pick a genre to see the week's hottest songs(1-7)".center(125)
+    choice = gets.chomp.to_i
+    end until (1..7).to_a.include?(choice)
+    display_songs
+  end
+
+  def display_songs
+    HotSongs::Songs.get_songs
+
+    
+  end
 end
 
