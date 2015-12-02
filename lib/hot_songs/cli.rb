@@ -32,15 +32,20 @@ class HotSongs::CLI
 
   def display_songs(genre)
     puts
-    songs, artists, title = HotSongs::Songs.get_songs_artists(genre)
+    songs, artists, title, week = HotSongs::Songs.scrape_songs_artists(genre)
+    
     system 'clear'
-    puts "This week's hottest #{genres[genre.to_i-1]} songs".center(125)
+    puts "Hottest #{genres[genre.to_i-1]} songs for the week of #{week}".center(125)
     puts
     songs.each.with_index(1) { |song, index| puts "#{index}. #{song} -- #{artists[index-1]}".center(125)}
     2.times {puts}
-    puts "Press enter to return to main menu".center(125)
+    puts "Press enter to return to".center(125)
     gets.chomp
     system 'clear'
+  end
+
+  def display_chart_history
+
   end
 
   def main_loop

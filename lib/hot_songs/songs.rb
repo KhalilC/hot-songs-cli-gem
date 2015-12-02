@@ -1,11 +1,6 @@
 class HotSongs::Songs
-  attr_accessor :genres
-
-  def self.genres
-    @@genres
-  end
-
-  def self.get_songs_artists(genre)
+  attr_accessor :stats
+  def self.scrape_songs_artists(genre)
     genres = ['http://www.billboard.com/charts/pop-songs',
             'http://www.billboard.com/charts/country-songs',
             'http://www.billboard.com/charts/rock-songs',
@@ -18,18 +13,19 @@ class HotSongs::Songs
     songs = []
     artists = []
     title = doc.css('.chart-header-headline span').text
+    week = doc.css('time').text
     doc.css('.row-title h2').each {|artist| songs << artist.text.strip}
     doc.css('.row-title h3').each {|artist| artists << artist.text.strip}
-
-    return songs, artists, title
+    return songs, artists, title, week, self.song_chart_history(doc)
   end
 
-  def self.get_artists
-    html = open('http://www.billboard.com/charts/pop-songs')
-    doc = Nokogiri::HTML(html)
-    artists = []
-    doc.css('.row-title h3').each {|artist| artists << artist.text.strip}
-    artists
+  def self.song_chart_history(doc)
+    stats = []
+    doc.css('.stats').each { |song| stats << song.children.text.split("\n")}
+    chart_history = stats.map do |stat|
+      stats = stat.map {|history_stat| history_stat.strip}.select {|word| word != "" }
+    end
+    chart_history
   end
-
 end
+
