@@ -1,5 +1,9 @@
 
 class HotSongs::CLI
+  attr_accessor :genres
+  def initialize
+    @genres = %w{ Pop Country Rock R&B/Rap Dance/Electronic Latin Christian/Gospel }
+  end
   def about
     system 'clear'
     puts "Hot Songs v1.0".center(125)
@@ -8,29 +12,31 @@ class HotSongs::CLI
           as compiled by Nielsen Music and streaming activity data from online music sources tracked by Nielsen Music. 
           Songs are defined as current if they are newly-released titles, or songs receiving widespread airplay and/or 
           sales activity for the first time.".center(421)
+    3.times {puts}
     display_menu
   end
 
   def display_menu
-    3.times {puts}
-    genres = %w{ Pop Country Rock R&B/Rap Dance/Electronic Latin Christian/Gospel }
     genres.each.with_index(1) { |genre, index| puts "#{index}. #{genre}".center(125)}
-    2.times {puts}
+    puts
     user_input
+    
   end
 
   def user_input
     begin
-    puts "Please pick a genre to see the week's hottest songs(1-7)".center(125)
+    print "Please pick a genre to see the week's hottest songs(1-7): ".center(125)
     choice = gets.chomp.to_i
     end until (1..7).to_a.include?(choice)
-    display_songs
+    display_songs(choice)
   end
 
-  def display_songs
-    HotSongs::Songs.get_songs
-
-    
+  def display_songs(genre)
+    puts
+    songs, artists, title = HotSongs::Songs.get_songs_artists(genre)
+    puts "This week's hottest #{genres[genre-1]} songs".center(125)
+    puts
+    songs.each.with_index(1) { |song, index| puts "#{index}. #{song} -- #{artists[index-1]}".center(125)}
   end
 end
 
