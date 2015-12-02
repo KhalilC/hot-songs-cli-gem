@@ -13,7 +13,7 @@ class HotSongs::Songs
             'http://www.billboard.com/charts/dance-electronic-songs',
             'http://www.billboard.com/charts/latin-songs',
             'http://www.billboard.com/charts/christian-songs']
-    html = open(genres[genre-1])
+    html = open(genres[genre.to_i-1])
     doc = Nokogiri::HTML(html)
     songs = []
     artists = []
