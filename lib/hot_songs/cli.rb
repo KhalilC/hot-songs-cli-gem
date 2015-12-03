@@ -32,7 +32,7 @@ class HotSongs::CLI
 
   def display_songs(genre)
     puts
-    songs, artists, title, week, history = HotSongs::Songs.scrape_songs_artists(genre)
+    songs, artists, title, week, chart_history = HotSongs::Songs.scrape_songs_artists(genre)
     system 'clear'
     puts "Hottest #{genres[genre.to_i-1]} songs for the week of #{week}".center(125)
     puts
@@ -40,12 +40,22 @@ class HotSongs::CLI
     2.times {puts}
     puts "Press enter to return to return or enter a number to see the song's chart history".center(125)
     answer = gets.chomp
-    display_chart_history(genre, history) if ('1'..songs.count.to_s).include?(answer)
+    display_chart_history(songs[answer.to_i-1], artists[answer.to_i-1], chart_history[answer.to_i-1]) if ('1'..songs.count.to_s).include?(answer)
     system 'clear'
   end
 
-  def display_chart_history(genre, history)
-    binding.pry
+  def display_chart_history(song, artist, chart_history)
+    puts "#{song} - #{artist}".center(125)
+    puts
+    puts "*****Chart History******".center(125)
+    puts 
+    chart_history.each_with_index do |stat, index|
+      next if index.odd?
+      puts "#{stat} -- #{chart_history[index+1]}".center(125)
+      puts
+    end
+    puts "Press enter to return to song list".center(125)
+    gets.chomp
   end
 
   def main_loop
