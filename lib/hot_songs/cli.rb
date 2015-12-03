@@ -40,11 +40,12 @@ class HotSongs::CLI
     2.times {puts}
     puts "Press enter to return to return or enter a number to see the song's chart history".center(125)
     answer = gets.chomp
-    display_chart_history(songs[answer.to_i-1], artists[answer.to_i-1], chart_history[answer.to_i-1]) if ('1'..songs.count.to_s).include?(answer)
-    system 'clear'
+    display_chart_history(songs[answer.to_i-1], artists[answer.to_i-1], chart_history[answer.to_i-1], genre) if ('1'..songs.count.to_s).include?(answer)
+    system 'clear' 
   end
 
-  def display_chart_history(song, artist, chart_history)
+  def display_chart_history(song, artist, chart_history, genre)
+    system 'clear'
     puts "#{song} - #{artist}".center(125)
     puts
     puts "*****Chart History******".center(125)
@@ -56,6 +57,7 @@ class HotSongs::CLI
     end
     puts "Press enter to return to song list".center(125)
     gets.chomp
+    display_songs(genre)
   end
 
   def main_loop
@@ -63,6 +65,8 @@ class HotSongs::CLI
     loop do 
       break if %w{q quit}.include?(display_menu)
     end
+    system 'clear'
+    puts "Goodbye!".center(125)
   end
 end
 
