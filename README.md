@@ -1,6 +1,6 @@
 # HotSongs
 
-HotSongs is a gem that utitlizes Billboard data to provide the week's most popular songs by genre.
+HotSongs is a gem that utitlizes Billboard data to provide the week's most popular songs by genre.  A little confusing, but after installing type hot-songs not hot_songs in the terminal to run.
 
 ## Installation
 
