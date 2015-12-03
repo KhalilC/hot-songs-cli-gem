@@ -14,7 +14,7 @@ class HotSongs::Songs
     artists = []
     title = doc.css('.chart-header-headline span').text
     week = doc.css('time').text
-    doc.css('.row-title h2').each {|artist| songs << artist.text.strip}
+    doc.css('.row-title h2').each {|song| songs << song.text.strip}
     doc.css('.row-title h3').each {|artist| artists << artist.text.strip}
     return songs, artists, title, week, self.song_chart_history(doc)
   end
