@@ -1,5 +1,3 @@
-
 require_relative '../lib/hot_songs'
-
 
 HotSongs::CLI.new.main_loop
