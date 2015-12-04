@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["klcrumpler@gmail.com"]
 
   spec.summary       = %q{Retrive popular songs for user specifed genre}
-  spec.description   = %q{Retrieves most popular artist and song info based from Billboard.}
+  spec.description   = %q{Retrieves most popular artist and song data from Billboard.}
   spec.homepage      = "https://github.com/KhalilC/hot-songs-cli-gem"
   spec.license       = "MIT"
 
@@ -21,10 +21,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib", "lib/hot_songs"]
 
-  spec.add_runtime_dependency 'nokogiri', '~> 1.6'
-  spec.add_runtime_dependency 'rspec', '~> 3.3'
+  spec.add_development_dependency 'nokogiri'
+  spec.add_development_dependency 'rspec' 
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_runtime_dependency 'pry', '~> 0.10.3'
+  spec.add_development_dependency 'pry'
 end
