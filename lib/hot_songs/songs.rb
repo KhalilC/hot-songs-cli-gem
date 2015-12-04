@@ -1,5 +1,7 @@
 class HotSongs::Songs
+
   attr_accessor :stats
+  
   def self.scrape_songs_artists(genre)
     genres = ['http://www.billboard.com/charts/pop-songs',
             'http://www.billboard.com/charts/country-songs',
