@@ -1,10 +1,11 @@
 class HotSongs::CLI
-  
+
   attr_accessor :genres
 
   def initialize
     @genres = %w{ Pop Country Rock R&B/Rap Dance/Electronic Latin Christian/Gospel }
   end
+  
   def about
     system 'clear'
     puts "Hot Songs v1.0".center(125)
