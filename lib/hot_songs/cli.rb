@@ -5,7 +5,7 @@ class HotSongs::CLI
   def initialize
     @genres = %w{ Pop Country Rock R&B/Rap Dance/Electronic Latin Christian/Gospel }
   end
-  
+
   def about
     system 'clear'
     puts "Hot Songs v1.0".center(125)
@@ -40,7 +40,7 @@ class HotSongs::CLI
     puts
     songs.each.with_index(1) { |song, index| puts "#{index}. #{song} -- #{artists[index-1]}".center(125)}
     2.times {puts}
-    puts "Press enter to return to return or enter a number to see the song's chart history".center(125)
+    puts "Press enter to return to genre list or enter a number to see the song's chart history".center(125)
     answer = gets.chomp
     display_chart_history(songs[answer.to_i-1], artists[answer.to_i-1], chart_history[answer.to_i-1], genre) if ('1'..songs.count.to_s).include?(answer)
     system 'clear' 
